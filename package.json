@@ -1,0 +1,30 @@
+{
+	"name": "mix16-pro",
+	"version": "1.0.0",
+	"api_version": "1.0.0",
+	"keywords": [
+		"MiX16 PRO",
+		"audio"
+	],
+	"manufacturer": "MiX16 Apps",
+	"product": "PRO",
+	"shortname": "mix16-pro",
+	"homepage": "https://github.com/bitfocus/companion-module-mix16-pro#readme",
+	"description": "Remote control of the MiX16 GO/PRO.",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Joseph Adams <josephdadams@gmail.com>",
+	"license": "MIT",
+	"dependencies": {
+		"osc": "^2.4.3"
+	},
+	"bugs": {
+		"url": "https://github.com/bitfocus/companion-module-mix16-pro/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bitfocus/companion-module-mix16-pro.git"
+	}
+}
