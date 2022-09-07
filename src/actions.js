@@ -33,6 +33,26 @@ module.exports = {
 			}
 		};
 
+		actionsArr.playlistNextCue = {
+			label: 'Select Playlist Next Cue',
+			callback: function (action, bank) {
+				let msg = {
+					address: '/mix16apps/playlist/nextcue'
+				};
+				self.sendCommand(msg);
+			}
+		};
+
+		actionsArr.playlistPrevCue = {
+			label: 'Select Playlist Previous Cue',
+			callback: function (action, bank) {
+				let msg = {
+					address: '/mix16apps/playlist/prevcue'
+				};
+				self.sendCommand(msg);
+			}
+		};
+
 		actionsArr.playlistStopAll = {
 			label: 'Trigger Playlist Stop All Button',
 			callback: function (action, bank) {
