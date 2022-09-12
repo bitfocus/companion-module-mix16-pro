@@ -1,3 +1,4 @@
+const { listPackage } = require('asar');
 const API = require('./api')
 
 module.exports = {
@@ -23,13 +24,39 @@ module.exports = {
 		let self = this; // required to have reference to outer `this`
 		let actionsArr = {};
 
+		actionsArr.playlistSetGo = {
+			label: 'Trigger Playlist Set GO Number',
+			options: [
+				{
+					type: 'number',
+					label: 'Cue Number',
+					id: 'cuenumber',
+					default: 1,
+					required: true
+				}
+			],
+			//options: options,
+			callback: function (action, bank) {
+				let msg = {
+					address: 'mix16apps/playlist/setgo',
+					args: [
+						{
+							type: 'i',
+							value: parseInt(action.options.cuenumber)
+						}
+					]
+				};
+				self.sendCommand(msg, self);
+			}
+		};
+
 		actionsArr.playlistGo = {
 			label: 'Trigger Playlist GO Button',
 			callback: function (action, bank) {
 				let msg = {
 					address: '/mix16apps/playlist/go'
 				};
-				self.sendCommand(msg);
+				self.sendCommand(msg, self);
 			}
 		};
 
@@ -39,7 +66,7 @@ module.exports = {
 				let msg = {
 					address: '/mix16apps/playlist/nextcue'
 				};
-				self.sendCommand(msg);
+				self.sendCommand(msg, self);
 			}
 		};
 
@@ -49,7 +76,7 @@ module.exports = {
 				let msg = {
 					address: '/mix16apps/playlist/prevcue'
 				};
-				self.sendCommand(msg);
+				self.sendCommand(msg, self);
 			}
 		};
 
@@ -59,7 +86,7 @@ module.exports = {
 				let msg = {
 					address: '/mix16apps/playlist/stopall'
 				};
-				self.sendCommand(msg);
+				self.sendCommand(msg, self);
 			}
 		};
 

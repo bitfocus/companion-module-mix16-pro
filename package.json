@@ -15,7 +15,7 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"author": "Joseph Adams <josephdadams@gmail.com>",
+	"author": "Mitchell Jonker <mcjonker9@gmail.com>",
 	"license": "MIT",
 	"dependencies": {
 		"osc": "^2.4.3"

@@ -1,52 +1,54 @@
 const OSC = require('osc');
 
 class API {
-	constructor(config) {
+	constructor(config, self) {
+		console.log('CONFIG*********');
+		console.log(config);
 		const apiHost = config.host
 		const apiPort = config.port
 
-		if (this.oscSocket == null) {
-			if (config.host) {
-				this.oscSocket = new OSC.UDPPort({
+		if (self.oscSocket == null) {
+			if (self.config.host) {
+				self.oscSocket = new OSC.UDPPort({
 					localAddress: '0.0.0.0',
 					localPort: config.receiveport,
-					address: this.config.host,
+					address: config.host,
 					port: config.port,
 					metadata: true
 				});
 
-				this.connecting = true;
+				self.connecting = true;
 	
-				this.oscSocket.open();
+				self.oscSocket.open();
 	
-				this.oscSocket.on('error', (err) => {
+				self.oscSocket.on('error', (err) => {
 					debug('Error', err);
-					this.log('error', 'Error: ' + err.message);
-					this.connecting = false;
-					this.status(this.STATUS_ERROR, 'Can\'t connect to Software');
+					self.log('error', 'Error: ' + err.message);
+					self.connecting = false;
+					self.status(self.STATUS_ERROR, 'Can\'t connect to Software');
 					if (err.code == 'ECONNREFUSED') {
-						this.oscSocket.removeAllListeners();
+						self.oscSocket.removeAllListeners();
 					}
 				});
 	
-				this.oscSocket.on('close', () => {
-					this.log('error', 'Connection to Software Closed');
-					this.connecting = false;
-					this.status(this.STATUS_WARNING, 'CLOSED');
+				self.oscSocket.on('close', () => {
+					self.log('error', 'Connection to Software Closed');
+					self.connecting = false;
+					self.status(self.STATUS_WARNING, 'CLOSED');
 				});
 	
-				this.oscSocket.on('ready', () => {
-					this.connecting = false;
-					this.log('info','Connected to Software:' + this.config.host);
+				self.oscSocket.on('ready', () => {
+					self.connecting = false;
+					self.log('info','Connected to Software:' + config.host);
 				});
 	
-				this.oscSocket.on('message', (message) => {
-					this.processMessage(message);
-				  	this.checkFeedbacks();
-					this.checkVariables();
+				self.oscSocket.on('message', (message) => {
+					self.processMessage(message);
+					self.checkFeedbacks();
+					self.checkVariables();
 				});
 	
-				this.oscSocket.on('data', (data) => {
+				self.oscSocket.on('data', (data) => {
 				});
 			}
 		}
@@ -59,29 +61,29 @@ class API {
 		}*/
 	}
 
-	static sendCommand(msg) {
-		if (this.oscSocket !== null) {
-			this.oscSocket.send(msg);
+	static sendCommand(msg, self) {
+		if (self.oscSocket !== null) {
+			self.oscSocket.send(msg);
 		}
 		else {
 			//throw an error
 		}
 	}
 
-	static getData() {
-		if (this.oscSocket !== null) {
+	static getData(self) {
+		if (self.oscSocket !== null) {
 
 			let basicInfoMsg = {
 				address: '/mix16apps/basicinfo'
 			};
 
-			this.oscSocket.send(basicInfoMsg);
+			self.oscSocket.send(basicInfoMsg);
 
 			let fullInfoMsg = {
 				address: '/mix16apps/fullinfo'
 			};
 
-			this.oscSocket.send(fullInfoMsg);
+			self.oscSocket.send(fullInfoMsg);
 		}
 		else {
 			//throw an error

@@ -17,7 +17,7 @@ module.exports = {
 			this.log('debug', `Polling started. Requesting new data from server every ${this.config.pollingrate}ms`);
 
 			this.pollingInterval = setInterval(async () => {
-				API.getData();
+				API.getData(this);
 			}, this.config.pollingrate)
 		}
 	}

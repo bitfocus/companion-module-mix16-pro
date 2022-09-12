@@ -87,7 +87,7 @@ class Mix16Instance extends InstanceSkel {
 	}
 
 	init_api() {
-		this.connection = new API();
+		this.connection = new API(this.config, this);
 	}
 
 	destroy() {
