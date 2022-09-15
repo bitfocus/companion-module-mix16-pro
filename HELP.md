@@ -7,13 +7,13 @@ This module will allow you to control  MiX16 GO/PRO (version 9.0+) on macOS.
 
 ## Actions
 
-# All Installations (iPadOS & macOS)
+### All Installations (iPadOS & macOS)
 * Trigger Playlist GO Button
 * Trigger Playlist Stop All Cues Button
 * Select Playlist Previous Cue
 * Select Playlist Next Cue
 
-# macOS Only
+### macOS Only
 * Trigger Playlist Set GO Number
 * Stop All (Playlist, All channels, Image Slide Show and Lighting Scenes)
 * Reset Playlist Cues and All Channels Play Status
